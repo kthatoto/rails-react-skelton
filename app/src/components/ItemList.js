@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { deleteItem } from '../actions/itemActionCreator';
+import { requestFetchItems, requestDeleteItem } from '../actions/itemActionCreator';
 
 class ItemList extends Component {
-  componentDidMound() {
+  componentDidMount() {
+    this.props.requestFetchItems();
   }
-  renderItem(name, i) {
+  renderItem(name, id) {
     return (
-      <li key={"item" + i}>
+      <li key={"item" + id}>
         <div className="items__item">
           {name}
-          <span className="items__delete" onClick={() => this.deleteItem(i)}></span>
+          <span className="items__delete" onClick={() => this.requestDeleteItem(id)}></span>
         </div>
       </li>
     );
   }
-  deleteItem(i) {
-    this.props.deleteItem(i);
+  requestDeleteItem(id) {
+    this.props.requestDeleteItem(id);
   }
   render() {
     return (
       <ul>
-        {this.props.ItemReducer.items.map((item, index) => {
-          return this.renderItem(item.name, index);
+        {this.props.ItemReducer.items.map((item) => {
+          return this.renderItem(item.name, item.id);
         })}
       </ul>
     );
@@ -34,8 +35,11 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    deleteItem: index => {
-      dispatch(deleteItem(index))
+    requestFetchItems: () => {
+      dispatch(requestFetchItems());
+    },
+    requestDeleteItem: id => {
+      dispatch(requestDeleteItem(id));
     },
   };
 }

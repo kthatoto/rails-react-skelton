@@ -7,9 +7,12 @@ class ItemsController < ApplicationController
 
   def create
     item = Item.create(item_params)
-    render json: { message: 'created' }
+    render json: {
+      message: 'created',
+      item: item,
+    }
   end
-  def destory
+  def destroy
     item = Item.find(params[:id])
     item.destroy
     render json: { message: 'deleted' }

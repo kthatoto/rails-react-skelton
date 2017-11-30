@@ -8,14 +8,26 @@ export default function item(state = initialState, action) {
     case 'SUBMIT_ITEM':
       return Object.assign({}, state, {
         items: [
+          ...state.items,
           {
             name: action.itemName,
-          },
-          ...state.items
+            id: action.itemId,
+          }
         ],
       });
+    case 'FETCH_ITEMS':
+      return Object.assign({}, state, {
+        items: action.items.map(item => (
+          {
+            name: item.name,
+            id: item.id,
+          }
+        ))
+      });
     case 'DELETE_ITEM':
-      const fileteredItems = state.items.filter((item, i) => i != action.index);
+      const fileteredItems = state.items.filter(item =>
+        item.id != action.id
+      );
       return Object.assign({}, state, {
         items: fileteredItems,
       });

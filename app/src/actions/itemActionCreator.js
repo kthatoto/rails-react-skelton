@@ -9,22 +9,49 @@ export function requestSubmitItem(itemName) {
       },
       //{ withCredentials: true }
     ).then(response => {
-      console.log(response);
-      dispatch(submitItem(itemName));
+      dispatch(submitItem(
+        response.data.item.name,
+        response.data.item.id,
+      ));
     });
   };
 }
+export function requestFetchItems() {
+  return dispatch => {
+    return axios.get(
+      'http://0.0.0.0:3000/items',
+    ).then(response => {
+      dispatch(fetchItems(response.data.items));
+    });
+  }
+}
+export function requestDeleteItem(id) {
+  return dispatch => {
+    return axios.delete(
+      'http://0.0.0.0:3000/items/' + id,
+    ).then(response => {
+      dispatch(deleteItem(id));
+    });
+  }
+}
 
-function submitItem(itemName) {
+function submitItem(itemName, itemId) {
   return {
     type: "SUBMIT_ITEM",
     itemName,
+    itemId,
   };
 }
+function fetchItems(items) {
+  return {
+    type: "FETCH_ITEMS",
+    items,
+  }
+}
 
-export function deleteItem(index) {
+export function deleteItem(id) {
   return {
     type: "DELETE_ITEM",
-    index,
+    id,
   }
 }
