@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { submitItem } from '../actions/itemActionCreator';
+import { requestSubmitItem } from '../actions/itemActionCreator';
 
 class Form extends Component {
   render() {
     return (
       <div className="form">
         <input type="text" className="form__input" ref="inputText" />
-        <button onClick={() => this.submitItem()} className="form__submit">submit</button>
+        <button onClick={() => this.requestSubmitItem()} className="form__submit">submit</button>
       </div>
     );
   }
 
-  submitItem() {
+  requestSubmitItem() {
     const itemName = this.refs.inputText.value;
-    this.props.submitItem(itemName);
+    this.props.requestSubmitItem(itemName);
   }
 }
 function mapStateToProps(state) {
@@ -23,8 +23,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    submitItem: itemName => {
-      dispatch(submitItem(itemName))
+    requestSubmitItem: itemName => {
+      dispatch(requestSubmitItem(itemName))
     },
   };
 }

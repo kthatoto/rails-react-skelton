@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { deleteItem } from '../actions/itemActionCreator';
 
 class ItemList extends Component {
+  componentDidMound() {
+  }
   renderItem(name, i) {
     return (
       <li key={"item" + i}>
