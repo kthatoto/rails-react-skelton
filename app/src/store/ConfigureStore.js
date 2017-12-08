@@ -5,7 +5,7 @@ import rootReducer from '../reducers/IndexReducer';
 
 export default function createStoreWithMiddleware() {
   const store = applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
+    thunkMiddleware,
   )(createStore);
   return store(rootReducer);
 }

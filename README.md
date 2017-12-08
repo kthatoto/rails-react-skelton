@@ -1,12 +1,19 @@
 
-## TODO
-- テキストが空の時はアラート(バリデーション)
+# React-Redux-Rails skelton on Docker
+
+## Requirement
+- Docker
+## Installation
+```
+$ git clone git@github.com:tk1to/rails-react-skelton.git
+$ cd rails-react-skelton
+$ docker-compose build
+```
 
 ## ports
-### nodeサーバー
-`8080`
-### railsサーバー
-`3000`
+### node server `8080`
+### rails server `3000`
+
 
 ## ./bin/rails_new の後
 
