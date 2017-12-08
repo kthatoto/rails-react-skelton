@@ -1,32 +1,37 @@
-
 # React-Redux-Rails skelton on Docker
 
 ## Requirement
 - Docker
+
 ## Installation
 ```
 $ git clone git@github.com:tk1to/rails-react-skelton.git
 $ cd rails-react-skelton
+```
+
+## Setup
+```
+$ docker-compose build
+$ docker-compose up -d
+$ docker-compose down
+$ docker-compose run --rm rails rails db:create
+$ docker-compose run --rm rails rails db:migrate
+$ docker-compose up -d
+```
+
+## Access
+[http://0.0.0.0:8080](http://0.0.0.0:8080)
+
+## Add gem
+```
+$ echo 'gem "{gemname}"' >> ./docker/rails/Gemfile
+# or edit ./docker/rails/Gemfile
+
 $ docker-compose build
 ```
 
-## ports
-### node server `8080`
-### rails server `3000`
-
-
-## ./bin/rails_new の後
-
+## Add node module
 ```
-$ docker-compose up
-<ctrl-C>
-$ docker-compose run --rm rails rake db:create
+# edit ./docker/node/Dockerfile
+$ docker-compose build
 ```
-
-## gemを追加したい時
-- ./docker/rails/Gemfileにgem追加
-- `$ dcoker-compose build`
-
-## Node moduleを追加したい時
-- ./docker/node/Dockerにモジュール追加
-- `$ dcoker-compose build`
