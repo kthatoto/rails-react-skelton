@@ -7,12 +7,12 @@ export function requestSubmitItem(itemName) {
       { item:
         { name: itemName }
       },
-      //{ withCredentials: true }
     ).then(response => {
-      dispatch(submitItem(
-        response.data.item.name,
-        response.data.item.id,
-      ));
+      dispatch({
+        type: 'SUBMIT_ITEM',
+        itemName: response.data.item.name,
+        itemId: response.data.item.id,
+      });
     });
   };
 }
@@ -21,7 +21,10 @@ export function requestFetchItems() {
     return axios.get(
       'http://0.0.0.0:3000/items',
     ).then(response => {
-      dispatch(fetchItems(response.data.items));
+      dispatch({
+        type: 'FETCH_ITEMS',
+        items: response.data.items,
+      });
     });
   }
 }
@@ -30,28 +33,10 @@ export function requestDeleteItem(id) {
     return axios.delete(
       'http://0.0.0.0:3000/items/' + id,
     ).then(response => {
-      dispatch(deleteItem(id));
+      dispatch({
+        type: 'DELETE_ITEM',
+        id,
+      });
     });
-  }
-}
-
-function submitItem(itemName, itemId) {
-  return {
-    type: "SUBMIT_ITEM",
-    itemName,
-    itemId,
-  };
-}
-function fetchItems(items) {
-  return {
-    type: "FETCH_ITEMS",
-    items,
-  }
-}
-
-export function deleteItem(id) {
-  return {
-    type: "DELETE_ITEM",
-    id,
   }
 }
